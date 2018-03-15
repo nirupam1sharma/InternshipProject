@@ -16,6 +16,7 @@ system.time({
   # loading functions 
   source(paste0(Working_Directory,"\\Rcode\\", "installPackages.R"))
   source(paste0(Working_Directory,"\\Rcode\\", "Function_CourseFileTemplates.R"))
+  source(paste0(Working_Directory,"\\Rcode\\", "Function_SectionFileTemplates.R"))
   outputDirectory <- paste0(Working_Directory,"\\Output\\")
   print("Choice determination process begins")
   userchoice <- readline("Choose which file do you want to transform:
@@ -29,21 +30,21 @@ system.time({
   
   # Course Import
   if(userchoice=="1"){
-  # input file
-  print("Performing conversion for Course imports")
-  data_location <- file.choose(new = T)
-  df <- read_excel(data_location)
-  # performing manipulation
-  system.time({
-    outputfile <- courseTemplate(df)
-  })
-  # output folder
-  outputFilename <- paste("2175 Courses Import ",today(),".csv",sep="")
-  tempchange <- getwd()
-  setwd(outputDirectory)
-  outputfile <- unique(outputfile)
-  write.csv(outputfile,file = outputFilename,row.names = F)
-  setwd(tempchange)
+    # input file
+    print("Performing conversion for Course imports")
+    data_location <- file.choose(new = T)
+    df <- read_excel(data_location)
+    # performing manipulation
+    system.time({
+      outputfile <- courseTemplate(df)
+    })
+    # output folder
+    outputFilename <- paste("2175 Courses Import ",today(),".csv",sep="")
+    tempchange <- getwd()
+    setwd(outputDirectory)
+    outputfile <- unique(outputfile)
+    write.csv(outputfile,file = outputFilename,row.names = F)
+    setwd(tempchange)
   }
   
   # Sections file
@@ -54,10 +55,10 @@ system.time({
     df <- read_excel(data_location)
     # performing manipulation
     system.time({
-      outputfile <- courseTemplate(df)
+      outputfile <- SectionTemplate(df)
     })
     # output folder
-    outputFilename <- paste("2175 Courses Import ",today(),".csv",sep="")
+    outputFilename <- paste("2175 Sections Import ",today(),".csv",sep="")
     tempchange <- getwd()
     setwd(outputDirectory)
     outputfile <- unique(outputfile)
