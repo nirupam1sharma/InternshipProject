@@ -17,17 +17,18 @@ system.time({
   source(paste0(Working_Directory,"\\Rcode\\", "installPackages.R"))
   source(paste0(Working_Directory,"\\Rcode\\", "Function_CourseFileTemplates.R"))
   source(paste0(Working_Directory,"\\Rcode\\", "Function_SectionFileTemplates.R"))
+  source(paste0(Working_Directory,"\\Rcode\\", "Function_InstructorFileTemplates.R"))
+  source(paste0(Working_Directory,"\\Rcode\\", "Function_EnrollmentsTemplates.R"))
   outputDirectory <- paste0(Working_Directory,"\\Output\\")
   print("Choice determination process begins")
   userchoice <- readline("Choose which file do you want to transform:
                          1. Course File
-                         2. Section File")
-  print(userchoice)
-  
+                         2. Section File
+                         3. Instructor File
+                         4. Enrollments File")
+  print(userchoice)# Enrollments
   #### The following section defines the calling of 
   #### functions based on user choices
-  
-  
   # Course Import
   if(userchoice=="1"){
     # input file
@@ -46,7 +47,6 @@ system.time({
     write.csv(outputfile,file = outputFilename,row.names = F)
     setwd(tempchange)
   }
-  
   # Sections file
   else if(userchoice=="2"){
     # input file
@@ -59,6 +59,42 @@ system.time({
     })
     # output folder
     outputFilename <- paste("2175 Sections Import ",today(),".csv",sep="")
+    tempchange <- getwd()
+    setwd(outputDirectory)
+    outputfile <- unique(outputfile)
+    write.csv(outputfile,file = outputFilename,row.names = F)
+    setwd(tempchange)
+  }
+  # Instructor file
+  else if(userchoice=="3"){
+    # input file
+    print("Performing conversion for Instructor imports")
+    data_location <- file.choose(new = T)
+    df <- read_excel(data_location)
+    # performing manipulation
+    system.time({
+      outputfile <- InstructorTemplate(df)
+    })
+    # output folder
+    outputFilename <- paste("2175 Instructor Import ",today(),".csv",sep="")
+    tempchange <- getwd()
+    setwd(outputDirectory)
+    outputfile <- unique(outputfile)
+    write.csv(outputfile,file = outputFilename,row.names = F)
+    setwd(tempchange)
+  }
+  # Enrollments File
+  else if(userchoice=="4"){
+    # input file
+    print("Performing conversion for Enrollments imports")
+    data_location <- file.choose(new = T)
+    df <- read_excel(data_location)
+    # performing manipulation
+    system.time({
+      outputfile <- EnrollmentsTemplate(df)
+    })
+    # output folder
+    outputFilename <- paste("2175 Enrollments Import ",today(),".csv",sep="")
     tempchange <- getwd()
     setwd(outputDirectory)
     outputfile <- unique(outputfile)
