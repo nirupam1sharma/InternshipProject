@@ -1,7 +1,7 @@
 #################################################################################################################
 ### Purpose: R code for data tranformation. This is the file to be called first
 ### Author: Nirupam Sharma
-### Date: 03/13/2018
+### Date: 03/16/2018
 ### Version: v01
 #################################################################################################################
 
@@ -34,10 +34,10 @@ system.time({
     # input file
     print("Performing conversion for Course imports")
     data_location <- file.choose(new = T)
-    df <- read_excel(data_location)
+    inputfile <- read_excel(data_location)
     # performing manipulation
     system.time({
-      outputfile <- courseTemplate(df)
+      outputfile <- courseTemplate(inputfile)
     })
     # output folder
     outputFilename <- paste("2175 Courses Import ",today(),".csv",sep="")
@@ -52,10 +52,10 @@ system.time({
     # input file
     print("Performing conversion for Section imports")
     data_location <- file.choose(new = T)
-    df <- read_excel(data_location)
+    inputfile <- read_excel(data_location)
     # performing manipulation
     system.time({
-      outputfile <- SectionTemplate(df)
+      outputfile <- SectionTemplate(inputfile)
     })
     # output folder
     outputFilename <- paste("2175 Sections Import ",today(),".csv",sep="")
@@ -70,10 +70,10 @@ system.time({
     # input file
     print("Performing conversion for Instructor imports")
     data_location <- file.choose(new = T)
-    df <- read_excel(data_location)
+    inputfile <- read_excel(data_location)
     # performing manipulation
     system.time({
-      outputfile <- InstructorTemplate(df)
+      outputfile <- InstructorTemplate(inputfile)
     })
     # output folder
     outputFilename <- paste("2175 Instructor Import ",today(),".csv",sep="")
@@ -88,10 +88,10 @@ system.time({
     # input file
     print("Performing conversion for Enrollments imports")
     data_location <- file.choose(new = T)
-    df <- read_excel(data_location)
+    inputfile <- read_excel(data_location)
     # performing manipulation
     system.time({
-      outputfile <- EnrollmentsTemplate(df)
+      outputfile <- EnrollmentsTemplate(inputfile)
     })
     # output folder
     outputFilename <- paste("2175 Enrollments Import ",today(),".csv",sep="")
