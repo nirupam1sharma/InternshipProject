@@ -6,6 +6,7 @@
 #################################################################################################################
 EnrollmentsTemplate <- function(input_data)
 {
+  # the column names are altered to get the correct columns
   colnames(input_data)[colnames(input_data)=="Enrollment Status"] <- "Status"
   colnames(input_data)[colnames(input_data)=="First Name"] <- "FirstName"
   colnames(input_data)[colnames(input_data)=="Last Name"] <- "LastName"
@@ -19,16 +20,22 @@ EnrollmentsTemplate <- function(input_data)
   colnames(input_data)[colnames(input_data)=="Session End Date"] <- "EndDate"
   colnames(input_data)[colnames(input_data)=="Enrollment Status Date"] <- "RegisteredDate"
   colnames(input_data)[colnames(input_data)=="Enrollment Status Description"] <- "Status"
+  # create new column person Identifier by combining username and @uc.edu
   output_data <- within(input_data, PersonIdentifier <- paste(Username,
                                                               "@uc.edu",sep = ""))
+  # combine class section code and term code with sep ' _ '
   output_data <- within(output_data, temp <- paste(ClassSectionCode,
                                                    TermCode,sep = "_"))
+  # combine subject code, catalog number and above vari to form section identifier
   output_data <- within(output_data, SectionIdentifier <- paste(SubjectCode,CatalogNumber
                                                                 ,temp,sep = ""))
+  # define the 4 variables grade option, initial n
+  # n final course grade and status change date
   output_data$GradeOption=""
   output_data$InitialCourseGrade=""
   output_data$FinalCourseGrade=""
   output_data$StatusChangeDate=""
+  # return needed coln
   return(output_data[,c("PersonIdentifier","SectionIdentifier","Status","FirstName","LastName","Email"
                         ,"Credits","GradeOption","BeginDate","RegisteredDate","EndDate","InitialCourseGrade","StatusChangeDate","FinalCourseGrade")])
 }
