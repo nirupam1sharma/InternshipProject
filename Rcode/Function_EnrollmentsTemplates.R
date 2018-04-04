@@ -35,6 +35,9 @@ EnrollmentsTemplate <- function(input_data)
   output_data$InitialCourseGrade=""
   output_data$FinalCourseGrade=""
   output_data$StatusChangeDate=""
+  output_data$BeginDate <- format_iso_8601(ymd(output_data$BeginDate))
+  output_data$RegisteredDate <- format_iso_8601(ymd(output_data$RegisteredDate))
+  output_data$EndDate <- format_iso_8601(ymd(output_data$EndDate))
   # return needed coln
   return(output_data[,c("PersonIdentifier","SectionIdentifier","Status","FirstName","LastName","Email"
                         ,"Credits","GradeOption","BeginDate","RegisteredDate","EndDate","InitialCourseGrade","StatusChangeDate","FinalCourseGrade")])

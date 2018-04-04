@@ -36,4 +36,8 @@
     install.packages("lubridate")
     library(lubridate)
   }
+  if(!require("parsedate")){
+    install.packages("parsedate")
+    library(parsedate)
+  }
 }

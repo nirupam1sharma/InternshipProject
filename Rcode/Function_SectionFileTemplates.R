@@ -16,7 +16,8 @@ SectionTemplate <- function(input_data)
   colnames(input_data)[colnames(input_data)=="Course"] <- "Title"
   colnames(input_data)[colnames(input_data)=="Academic Progress Units"] <- "Credits"
   colnames(input_data)[colnames(input_data)=="Instruction Mode"] <- "DeliveryMode"
-  
+  input_data$BeginDate <- format_iso_8601(ymd(input_data$BeginDate))
+  input_data$EndDate <- format_iso_8601(ymd(input_data$EndDate))
   
   # create a new column as Org unit identifier from column subject 
   input_data$OrgUnitIdentifier <- input_data$Subject
