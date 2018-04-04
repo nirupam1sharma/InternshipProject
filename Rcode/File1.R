@@ -162,4 +162,3 @@ system.time({
     #come back to the previously working project folder location
   }
 })
-outputfile$BeginDate <- format_iso_8601(ymd(outputfile$BeginDate))
