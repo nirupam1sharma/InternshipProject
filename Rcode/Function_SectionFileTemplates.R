@@ -33,5 +33,10 @@ SectionTemplate <- function(input_data)
                                                                 TermIdentifier,sep = "_"))
   # define colnm description with none value followed by returning final variables
   output_data$Description <- ""
-  return(output_data[,c(16,2,14,3,4,5,6,7,13,8,9,10,11,17)])
+  output_data$DeliveryMode <- ifelse(output_data$DeliveryMode=="Partially DL 26-74%",
+         "Hybrid",ifelse(output_data$DeliveryMode=="In Person","Face2Face","Online"))
+  colnn <- c("SectionIdentifier","TermIdentifier","CourseIdentifier","Subject"  
+             ,"CourseNumber","Number","BeginDate","EndDate"  
+             ,"OrgUnitIdentifier","Title","Credits","DeliveryMode","Location","Description") 
+  return(output_data[,colnn])
 }
